@@ -3,6 +3,8 @@
 NextStepAI is an personalized AI career coach that helps job seekers unlock their potential through resume optimization, tailored cover letter generation, mock interview preparation, and weekly updates on industry hiring trends and in-demand skills.
 Built with Next.js, PostgreSQL, ClerkAuth, and Inngest. 
 
+<img width="1903" height="855" alt="image" src="https://github.com/user-attachments/assets/3b7dc7ff-88d1-443c-94e3-bcec3a4a88f3" />
+
 
 ---
 
