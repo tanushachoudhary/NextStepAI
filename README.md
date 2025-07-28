@@ -5,7 +5,7 @@ Built with Next.js, PostgreSQL, ClerkAuth, and Inngest.
 
 <img width="1903" height="855" alt="image" src="https://github.com/user-attachments/assets/3b7dc7ff-88d1-443c-94e3-bcec3a4a88f3" />
 
-<img width="1890" height="862" alt="Screenshot 2025-07-28 180113" src="https://github.com/user-attachments/assets/8c9ff666-bec5-428f-8c95-0922f9c8a12a" />
+<img width="1890" height="565" alt="Screenshot 2025-07-28 180113" src="https://github.com/user-attachments/assets/69d17d4c-3ec8-4456-975a-4142599f1637" />
 
 <img width="1906" height="863" alt="image" src="https://github.com/user-attachments/assets/cb84457f-6f62-4f00-8b43-2b31dccead02" />
 
