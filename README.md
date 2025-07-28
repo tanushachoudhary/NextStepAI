@@ -1,0 +1,84 @@
+# 💼 NextStepAI – Your Personalized AI Career Coach
+
+NextStepAI is an personalized AI career coach that helps job seekers unlock their potential through resume optimization, tailored cover letter generation, mock interview preparation, and weekly updates on industry hiring trends and in-demand skills.
+Built with Next.js, PostgreSQL, ClerkAuth, and Inngest. 
+
+
+---
+
+## 🚀 Features
+
+- ✅ **Resume Optimization** – Parses and enhances resumes based on job descriptions using AI
+- 📝 **Cover Letter Generator** – Generates personalized, role-specific cover letters
+- 🎯 **Mock Interview Quizzes** – Offers smart quiz prep for technical and behavioral rounds
+- 📈 **Industry Trends** – Curated weekly insights on skills in demand and hiring trends
+- 🔐 **Clerk Authentication** – Secure sign-in/sign-up with role-based routing
+- 🌐 **Fully Responsive** – Built with modern UI components and adaptive layouts
+
+---
+
+## 🧠 Tech Stack
+
+| Layer          | Tech Used                                                      |
+|----------------|----------------------------------------------------------------|
+| **Frontend**   | `Next.js`, `TailwindCSS`, `ShadCN UI`                          |
+| **Backend**    | `Inngest` (for serverless job pipelines), `Next.js API routes` |
+| **Auth**       | `Clerk`                                                        |
+| **Database**   | `PostgreSQL` hosted on `NeonDB`                                |
+| **Deployment** | Vercel                                                         |
+
+---
+
+## 🧪 Getting Started
+
+```bash
+git clone https://github.com/tanushachoudhary/NextStepAI.git
+cd NextStepAI
+npm install
+````
+
+### 🛠️ Configure Environment
+
+Create a `.env` file and add the required variables:
+
+```env
+CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+DATABASE_URL=postgresql://<user>:<password>@<neondb-host>/<db-name>
+GEMINI_API_KEY=
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+/app           → Next.js app directory (routes, components)
+/lib           → Utility functions
+/components    → Reusable UI components (ShadCN)
+/jobs          → Inngest functions for async background jobs
+/styles        → Tailwind and global styles
+.env.local     → Environment variables
+```
+
+---
+
+## 📍 Future Enhancements
+
+* 🎓 AI-powered skill gap detection
+* 🧠 LLM-based smart job matching
+* 📱 Mobile App (React Native)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Fork the repo, create a feature branch, and submit a pull request.
+
+---
+
+## 📄 License
+
+MIT © [Tanusha Choudhary](https://github.com/tanushachoudhary)
