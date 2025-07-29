@@ -16,31 +16,37 @@ export async function updateUser(data) {
   if (!user) throw new Error("User not found");
 
   try {
-    // Start a transaction to handle both operations
-    const result = await db.$transaction(
+    // 1. Check for the industry insight BEFORE the transaction
+    let industryInsight = await db.industryInsight.findUnique({
+      where: {
+        industry: data.industry,
+      },
+    });
+
+    let insightsToCreate = null;
+
+    // 2. If it doesn't exist, run the slow AI call OUTSIDE the transaction
+    if (!industryInsight) {
+      const insights = await generateAIInsights(data.industry);
+      insightsToCreate = {
+        industry: data.industry,
+        ...insights,
+        nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      };
+    }
+
+    // 3. Now, start the transaction for DATABASE operations ONLY
+    const updatedUser = await db.$transaction(
       async (tx) => {
-        // First check if industry exists
-        let industryInsight = await tx.industryInsight.findUnique({
-          where: {
-            industry: data.industry,
-          },
-        });
-
-        // If industry doesn't exist, create it with default values
-        if (!industryInsight) {
-          const insights = await generateAIInsights(data.industry);
-
-          industryInsight = await db.industryInsight.create({
-            data: {
-              industry: data.industry,
-              ...insights,
-              nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            },
+        // If we generated new insights, create the record now
+        if (insightsToCreate) {
+          await tx.industryInsight.create({
+            data: insightsToCreate,
           });
         }
 
-        // Now update the user
-        const updatedUser = await tx.user.update({
+        // Update the user
+        const userToUpdate = await tx.user.update({
           where: {
             id: user.id,
           },
@@ -52,18 +58,19 @@ export async function updateUser(data) {
           },
         });
 
-        return { updatedUser, industryInsight };
+        return userToUpdate;
       },
       {
-        timeout: 10000, // default: 5000
+        timeout: 15000, // You can likely lower this timeout now
       }
     );
 
     revalidatePath("/");
-    return result.user;
+    return updatedUser;
   } catch (error) {
     console.error("Error updating user and industry:", error.message);
-    throw new Error("Failed to update profile"+error.message);
+    // Throwing the original error can give more context on the client
+    throw new Error(`Failed to update profile: ${error.message}`);
   }
 }
 
